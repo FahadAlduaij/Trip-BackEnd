@@ -6,6 +6,7 @@ const path = require("path");
 const passport = require("passport");
 const { appendFile } = require("fs");
 const connectDB = require("./database");
+const userRoutes = require("./apis/users/user.routes");
 
 // Passport
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
@@ -26,9 +27,12 @@ passport.use(jwtStrategy);
 
 app.use("/media", express.static(path.join(__dirname, "media")));
 
+// Routes
+app.use("/api", userRoutes);
+
 // Error Handler
 app.use(errorHandler);
 
 app.listen(process.env.PORT || 8080, () =>
-	console.log(`Server Running on port ${process.env.PORT}`)
+  console.log(`Server Running on port ${process.env.PORT}`)
 );
