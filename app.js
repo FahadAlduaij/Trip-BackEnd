@@ -7,6 +7,9 @@ const passport = require("passport");
 const { appendFile } = require("fs");
 const connectDB = require("./database");
 
+// Passport
+const { localStrategy, jwtStrategy } = require("./middleware/passport");
+
 const app = express();
 connectDB();
 
@@ -14,9 +17,18 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+const { errorHandler } = require("./middleware/errorHandler");
 
-console.log(path.join(__dirname, "media"));
+// Passport
+app.use(passport.initialize());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
-app.listen(process.env.PORT, () =>
+app.use("/media", express.static(path.join(__dirname, "media")));
+
+// Error Handler
+app.use(errorHandler);
+
+app.listen(process.env.PORT || 8080, () =>
 	console.log(`Server Running on port ${process.env.PORT}`)
 );
