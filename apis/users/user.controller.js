@@ -2,6 +2,15 @@ const User = require("../../models/User");
 const { generateToken } = require("../../middleware/generateToken");
 const { createHash } = require("../../middleware/createHash");
 
+exports.fetchUsers = async (req, res, next) => {
+	try {
+		const users = await User.find();
+		return res.status(200).json(users);
+	} catch (error) {
+		next(error);
+	}
+};
+
 exports.signup = async (req, res, next) => {
 	try {
 		req.body.password = await createHash(req.body.password);

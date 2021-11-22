@@ -1,5 +1,6 @@
 const Trip = require("../../models/Trip");
 
+// Check the tripId
 exports.findTrip = async (tripId, next) => {
 	try {
 		const trip = await Trip.findById(tripId);
