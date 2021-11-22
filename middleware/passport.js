@@ -28,7 +28,7 @@ exports.jwtStrategy = new JWTStrategy(
 		secretOrKey: process.env.JWT_SECRET,
 	},
 	async (payload, done) => {
-		if (Date.now() > payload.exp) {
+		if (Date.now() > payload.exp * 1000) {
 			return done(null, false);
 		}
 		try {

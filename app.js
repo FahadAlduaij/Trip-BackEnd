@@ -7,6 +7,7 @@ const passport = require("passport");
 const { appendFile } = require("fs");
 const connectDB = require("./database");
 const userRoutes = require("./apis/users/user.routes");
+const tripRoutes = require("./apis/trip/trip.routes");
 
 // Passport
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
@@ -29,10 +30,11 @@ app.use("/media", express.static(path.join(__dirname, "media")));
 
 // Routes
 app.use("/api", userRoutes);
+app.use("/api/trips", tripRoutes);
 
 // Error Handler
 app.use(errorHandler);
 
 app.listen(process.env.PORT || 8080, () =>
-  console.log(`Server Running on port ${process.env.PORT}`)
+	console.log(`Server Running on port ${process.env.PORT}`)
 );
