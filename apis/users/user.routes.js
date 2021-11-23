@@ -1,9 +1,8 @@
 const express = require("express");
-const { signup, signin, fetchUsers } = require("./user.controller");
+const { signup, signin } = require("./user.controller");
 const router = express.Router();
 const passport = require("passport");
 
-router.get("/users", fetchUsers);
 router.post("/signup", signup);
 router.post(
 	"/signin",

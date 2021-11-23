@@ -5,9 +5,10 @@ const {
 	createTrip,
 	deleteTrip,
 	editTrip,
-} = require("./trip.controllers");
+} = require("./trips.controllers");
 const router = express.Router();
 const passport = require("passport");
+const upload = require("../../middleware/multer");
 
 router.param("tripId", async (req, res, next, tripId) => {
 	const trip = await findTrip(tripId, next);
@@ -23,7 +24,12 @@ router.param("tripId", async (req, res, next, tripId) => {
 });
 
 router.get("/", fetchTrips);
-router.post("/", passport.authenticate("jwt", { session: false }), createTrip);
+router.post(
+	"/",
+	passport.authenticate("jwt", { session: false }),
+	upload.single("image"),
+	createTrip
+);
 router.delete(
 	"/:tripId",
 	passport.authenticate("jwt", { session: false }),

@@ -24,8 +24,10 @@ exports.fetchTrips = async (req, res, next) => {
 
 exports.createTrip = async (req, res, next) => {
 	try {
+		console.log(req.file);
 		if (req.file) {
 			req.body.image = `/media/${req.file.filename}`;
+			req.body.image = req.body.image.replace("\\", "/");
 		}
 
 		req.body.owner = req.user._id;
@@ -45,7 +47,7 @@ exports.deleteTrip = async (req, res, next) => {
 		if (!req.user._id.equals(req.trip.owner)) {
 			return next({ status: 401, message: "Not the Owner" });
 		}
-		await Trip.deleteOne(req.trip._id);
+		await Trip.deleteOne(req.trip);
 		res.status(204).end();
 	} catch (error) {
 		next(error);
@@ -60,6 +62,7 @@ exports.editTrip = async (req, res, next) => {
 
 		if (req.file) {
 			req.body.image = `/media/${req.file.filename}`;
+			req.body.image = req.body.image.replace("\\", "/");
 		}
 
 		req.body.owner = req.user._id;

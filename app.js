@@ -3,16 +3,19 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const path = require("path");
-const passport = require("passport");
-const { appendFile } = require("fs");
-const connectDB = require("./database");
+
+// Routers
 const userRoutes = require("./apis/users/user.routes");
-const tripRoutes = require("./apis/trip/trip.routes");
+const tripRoutes = require("./apis/trips/trips.routes");
 
 // Passport
+const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
 
 const app = express();
+
+// Database
+const connectDB = require("./database");
 connectDB();
 
 // Middleware
