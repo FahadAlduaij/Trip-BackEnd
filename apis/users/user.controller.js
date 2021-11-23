@@ -13,8 +13,11 @@ exports.fetchUsers = async (req, res, next) => {
 
 exports.signup = async (req, res, next) => {
 	try {
+		if (req.file) {
+			req.body.image = `/media/${req.file.filename}`;
+		}
 		req.body.password = await createHash(req.body.password);
-		console.log(req.body);
+
 		const newUser = await User.create(req.body);
 		const token = generateToken(newUser);
 		res.status(201).json({ token });

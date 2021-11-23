@@ -25,7 +25,7 @@ exports.fetchTrips = async (req, res, next) => {
 exports.createTrip = async (req, res, next) => {
 	try {
 		if (req.file) {
-			req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+			req.body.image = `/media/${req.file.filename}`;
 		}
 
 		req.body.owner = req.user._id;
@@ -59,7 +59,7 @@ exports.editTrip = async (req, res, next) => {
 		}
 
 		if (req.file) {
-			req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+			req.body.image = `/media/${req.file.filename}`;
 		}
 
 		req.body.owner = req.user._id;
