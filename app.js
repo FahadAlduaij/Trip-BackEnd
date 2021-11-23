@@ -8,6 +8,7 @@ const { appendFile } = require("fs");
 const connectDB = require("./database");
 const userRoutes = require("./apis/users/user.routes");
 const tripRoutes = require("./apis/trip/trip.routes");
+// REVIEW: Remove extra requires
 
 // Passport
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
@@ -36,5 +37,5 @@ app.use("/api/trips", tripRoutes);
 app.use(errorHandler);
 
 app.listen(process.env.PORT || 8080, () =>
-	console.log(`Server Running on port ${process.env.PORT}`)
+  console.log(`Server Running on port ${process.env.PORT}`)
 );
