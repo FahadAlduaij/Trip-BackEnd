@@ -22,6 +22,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+// REVIEW: maskeen hal require, why mag6oo6 here?
 const { errorHandler } = require("./middleware/errorHandler");
 
 // Passport
@@ -39,5 +40,5 @@ app.use("/api/trips", tripRoutes);
 app.use(errorHandler);
 
 app.listen(process.env.PORT || 8080, () =>
-	console.log(`Server Running on port ${process.env.PORT}`)
+  console.log(`Server Running on port ${process.env.PORT}`)
 );

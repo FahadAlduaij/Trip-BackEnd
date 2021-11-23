@@ -3,20 +3,22 @@ const { generateToken } = require("../../utilities/generateToken");
 const { createHash } = require("../../utilities/createHash");
 
 exports.signup = async (req, res, next) => {
-	try {
-		if (req.file) {
-			req.body.image = `/media/${req.file.filename}`;
-		}
-		req.body.password = await createHash(req.body.password);
-		const newUser = await User.create(req.body);
-		const token = generateToken(newUser);
-		res.status(201).json({ token });
-	} catch (error) {
-		next(error);
-	}
+  try {
+    // REVIEW: you're using req.file, but not using multer middleware in the route
+    // REVIEW: Another thing, you want to save the image in the profile that's in the user right?
+    if (req.file) {
+      req.body.image = `/media/${req.file.filename}`;
+    }
+    req.body.password = await createHash(req.body.password);
+    const newUser = await User.create(req.body);
+    const token = generateToken(newUser);
+    res.status(201).json({ token });
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.signin = async (req, res) => {
-	const token = generateToken(req.user);
-	res.json({ token });
+  const token = generateToken(req.user);
+  res.json({ token });
 };
