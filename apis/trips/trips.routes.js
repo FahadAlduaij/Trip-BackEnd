@@ -38,6 +38,7 @@ router.delete(
 router.put(
 	"/:tripId",
 	passport.authenticate("jwt", { session: false }),
+	upload.single("image"),
 	editTrip
 );
 
