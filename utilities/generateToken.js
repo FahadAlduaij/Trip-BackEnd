@@ -5,6 +5,8 @@ exports.generateToken = (user) => {
 	const payload = {
 		_id: user._id,
 		username: user.username,
+		name: user.name,
+		profile: user.profile,
 	};
 
 	const token = jwt.sign(payload, process.env.JWT_SECRET, {

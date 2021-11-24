@@ -6,6 +6,7 @@ exports.signup = async (req, res, next) => {
 	try {
 		if (req.file) {
 			req.body.image = `/media/${req.file.filename}`;
+			req.body.image = req.body.image.replace("\\", "/");
 		}
 		req.body.password = await createHash(req.body.password);
 		const newUser = await User.create(req.body);
