@@ -8,6 +8,7 @@ exports.signup = async (req, res, next) => {
 			req.body.image = `/media/${req.file.filename}`;
 			req.body.image = req.body.image.replace("\\", "/");
 		}
+
 		req.body.password = await createHash(req.body.password);
 		const newUser = await User.create(req.body);
 		const token = generateToken(newUser);
@@ -24,9 +25,9 @@ exports.signin = async (req, res) => {
 
 exports.updateProfile = async (req, res, next) => {
 	try {
-		// if (!req.user._id.equals(req.user._id)) {
-		//   return next({ status: 401, message: "Not the Owner" });
-		// }
+		if (!req.user._id.equals(req.user._id)) {
+			return next({ status: 401, message: "Not the Owner" });
+		}
 
 		if (req.file) {
 			req.body.image = `/media/${req.file.filename}`;

@@ -5,8 +5,10 @@ exports.generateToken = (user) => {
 	const payload = {
 		_id: user._id,
 		username: user.username,
+		email: user.email,
 		name: user.name,
-		profile: user.profile,
+		image: user.image,
+		bio: user.bio,
 	};
 
 	const token = jwt.sign(payload, process.env.JWT_SECRET, {

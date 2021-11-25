@@ -11,7 +11,6 @@ const UserSchema = Schema(
 		password: {
 			type: String,
 			required: [true, "Password required"],
-			maxLength: [50, "Max length for password is 50"],
 		},
 		email: { type: String, required: [true, "Email required"] },
 		name: {
