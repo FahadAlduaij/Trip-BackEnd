@@ -24,6 +24,12 @@ const UserSchema = Schema(
 			type: String,
 			maxLength: [100, "Max length for bio is 100"],
 		},
+		wantToGo: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "Trip",
+			},
+		],
 	},
 	{ timestamps: true }
 );
