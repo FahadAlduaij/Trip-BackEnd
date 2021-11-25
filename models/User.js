@@ -6,26 +6,23 @@ const UserSchema = Schema(
 			type: String,
 			required: [true, "Username required"],
 			unique: true,
-			minLength: [1, "Min length for username is 2"],
 			maxLength: [30, "Max length for username is 30"],
 		},
 		password: {
 			type: String,
 			required: [true, "Password required"],
-			minLength: [5, "Min length for password is 2"],
+			maxLength: [50, "Max length for password is 50"],
 		},
 		email: { type: String, required: [true, "Email required"] },
 		name: {
 			type: String,
 			required: [true, "Name required"],
-			minLength: [2, "Min length for name is 2"],
 			maxLength: [20, "Max length for name is 20"],
 		},
 
 		image: String,
 		bio: {
 			type: String,
-			minLength: [2, "Min length for bio is 2"],
 			maxLength: [100, "Max length for bio is 100"],
 		},
 	},
