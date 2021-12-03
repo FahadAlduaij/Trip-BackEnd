@@ -5,6 +5,7 @@ const {
 	createTrip,
 	deleteTrip,
 	editTrip,
+	addCommentToTrip,
 } = require("./trips.controllers");
 const router = express.Router();
 const passport = require("passport");
@@ -30,6 +31,13 @@ router.post(
 	upload.single("image"),
 	createTrip
 );
+
+router.post(
+	"/:tripId/comments",
+	passport.authenticate("jwt", { session: false }),
+	addCommentToTrip
+);
+
 router.delete(
 	"/:tripId",
 	passport.authenticate("jwt", { session: false }),

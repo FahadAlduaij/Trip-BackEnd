@@ -16,6 +16,19 @@ const TripSchema = Schema(
 			type: Schema.Types.ObjectId,
 			ref: "User",
 		},
+		comments: [
+			{
+				user: {
+					type: Schema.Types.ObjectId,
+					ref: "User",
+					required: true,
+					trim: true,
+				},
+				username: String,
+				message: { type: String, required: true },
+				dateSent: { type: Date, default: Date.now },
+			},
+		],
 	},
 	{ timestamps: true }
 );
