@@ -68,7 +68,9 @@ exports.deleteTrip = async (req, res, next) => {
 		if (!req.user._id.equals(req.trip.owner)) {
 			return next({ status: 401, message: "Not the Owner" });
 		}
-		await Trip.deleteOne(req.trip);
+		await Trip.deleteOne(req.trip._id);
+		console.log(req.trip);
+
 		res.status(204).end();
 	} catch (error) {
 		next(error);
